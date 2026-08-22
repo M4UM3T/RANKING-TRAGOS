@@ -5,6 +5,7 @@
 let supabaseClient = null;
 let editingId = null;
 let selectedFile = null;
+let selectedFileRef = null;
 
 const tbody = document.getElementById('tbody');
 const overlay = document.getElementById('overlay');
@@ -102,8 +103,8 @@ function renderRow(t, rank) {
   const img = t.foto_url
     ? `<img src="${t.foto_url}" alt="${escapeHtml(t.nombre)}">`
     : `<div class="no-img">🍹</div>`;
-  const refImg = t.foto_url
-    ? `<img src="${t.foto_url}" alt="${escapeHtml(t.nombre)}">`
+  const refImg = t.foto_referencia_url
+    ? `<img src="${t.foto_referencia_url}" alt="${escapeHtml(t.nombre)}">`
     : `<div class="no-img">🍹</div>`;
 
   return `
@@ -147,9 +148,12 @@ overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(
 function openAdd() {
   editingId = null;
   selectedFile = null;
+  selectedFileRef = null;
   form.reset();
   document.getElementById('previewImg').style.display = 'none';
   document.getElementById('dropText').textContent = 'Haz clic para elegir una imagen (opcional)';
+  document.getElementById('previewImgRef').style.display = 'none';
+  document.getElementById('dropTextRef').textContent = 'Haz clic para elegir una imagen (opcional)';
   modalTitle.textContent = 'Agregar Trago';
   saveStatus.textContent = '';
   overlay.classList.add('open');
@@ -159,6 +163,7 @@ function openEdit(t) {
   if (!t) return;
   editingId = t.id;
   selectedFile = null;
+  selectedFileRef = null;
   document.getElementById('tragoId').value = t.id;
   document.getElementById('nombre').value = t.nombre;
   document.getElementById('descripcion').value = t.descripcion || '';
@@ -166,6 +171,7 @@ function openEdit(t) {
   document.getElementById('puntSabor').value = t.puntuacion_sabor;
   document.getElementById('puntPega').value = t.puntuacion_pega;
   document.getElementById('comentarios').value = t.comentarios || '';
+
   const preview = document.getElementById('previewImg');
   if (t.foto_url) {
     preview.src = t.foto_url;
@@ -175,6 +181,17 @@ function openEdit(t) {
     preview.style.display = 'none';
     document.getElementById('dropText').textContent = 'Haz clic para elegir una imagen (opcional)';
   }
+
+  const previewRef = document.getElementById('previewImgRef');
+  if (t.foto_referencia_url) {
+    previewRef.src = t.foto_referencia_url;
+    previewRef.style.display = 'block';
+    document.getElementById('dropTextRef').textContent = 'Imagen actual (haz clic para cambiarla)';
+  } else {
+    previewRef.style.display = 'none';
+    document.getElementById('dropTextRef').textContent = 'Haz clic para elegir una imagen (opcional)';
+  }
+
   modalTitle.textContent = 'Editar Trago';
   saveStatus.textContent = '';
   overlay.classList.add('open');
@@ -198,6 +215,19 @@ fotoInput.addEventListener('change', () => {
   document.getElementById('dropText').textContent = file.name;
 });
 
+const dropZoneRef = document.getElementById('dropZoneRef');
+const fotoInputRef = document.getElementById('fotoInputRef');
+dropZoneRef.addEventListener('click', () => fotoInputRef.click());
+fotoInputRef.addEventListener('change', () => {
+  const file = fotoInputRef.files[0];
+  if (!file) return;
+  selectedFileRef = file;
+  const preview = document.getElementById('previewImgRef');
+  preview.src = URL.createObjectURL(file);
+  preview.style.display = 'block';
+  document.getElementById('dropTextRef').textContent = file.name;
+});
+
 // --- Guardar (crear o editar) ---
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -212,6 +242,7 @@ form.addEventListener('submit', async (e) => {
 
   try {
     let foto_url = null;
+    let foto_referencia_url = null;
 
     if (selectedFile) {
       const ext = selectedFile.name.split('.').pop();
@@ -224,6 +255,17 @@ form.addEventListener('submit', async (e) => {
       foto_url = pub.publicUrl;
     }
 
+    if (selectedFileRef) {
+      const ext = selectedFileRef.name.split('.').pop();
+      const fileName = `${Date.now()}_${Math.random().toString(36).slice(2)}_ref.${ext}`;
+      const { error: upErr } = await supabaseClient.storage
+        .from('fotos-tragos')
+        .upload(fileName, selectedFileRef);
+      if (upErr) throw upErr;
+      const { data: pub } = supabaseClient.storage.from('fotos-tragos').getPublicUrl(fileName);
+      foto_referencia_url = pub.publicUrl;
+    }
+
     const payload = {
       nombre: document.getElementById('nombre').value.trim(),
       descripcion: document.getElementById('descripcion').value.trim(),
@@ -233,6 +275,7 @@ form.addEventListener('submit', async (e) => {
       comentarios: document.getElementById('comentarios').value.trim(),
     };
     if (foto_url) payload.foto_url = foto_url;
+    if (foto_referencia_url) payload.foto_referencia_url = foto_referencia_url;
 
     if (editingId) {
       const { error } = await supabaseClient.from('tragos').update(payload).eq('id', editingId);
