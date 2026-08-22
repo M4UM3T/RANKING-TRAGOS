@@ -13,6 +13,18 @@ const configBanner = document.getElementById('configBanner');
 const saveStatus = document.getElementById('saveStatus');
 const modalTitle = document.getElementById('modalTitle');
 
+// Captura cualquier error de JS y lo muestra en pantalla (para poder diagnosticar sin consola)
+window.addEventListener('error', (e) => {
+  if (tbody) {
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="8">⚠️ Error de JavaScript: ${e.message} (línea ${e.lineno})</td></tr>`;
+  }
+});
+window.addEventListener('unhandledrejection', (e) => {
+  if (tbody) {
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="8">⚠️ Error no controlado: ${e.reason && e.reason.message ? e.reason.message : e.reason}</td></tr>`;
+  }
+});
+
 // --- Inicializar Supabase ---
 function initSupabase() {
   const notConfigured =
