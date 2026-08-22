@@ -279,6 +279,16 @@
   </div>
 </div>
 
+<script>
+  // Captura errores ANTES de cargar app.js, para detectar problemas de carga o sintaxis
+  window.addEventListener('error', function(e) {
+    var tb = document.getElementById('tbody');
+    if (tb) {
+      tb.innerHTML = '<tr class="empty-row"><td colspan="8">⚠️ Error: ' +
+        (e.message || 'desconocido') + ' — archivo: ' + (e.filename || '?') + ' línea ' + (e.lineno || '?') + '</td></tr>';
+    }
+  }, true);
+</script>
 <script src="config.js"></script>
 <script src="app.js"></script>
 </body>
