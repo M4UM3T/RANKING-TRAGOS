@@ -18,113 +18,129 @@
     --ink-soft:#6b5f6b;
     --cream:#fffaf8;
     --line:#f4dfe6;
-    --beer:#e0a72e;
-    --star:#f0447d;
-    --radius:16px;
+    --good:#3f8a5c;
+    --good-bg:#e7f5ec;
+    --neutral:#a8781f;
+    --neutral-bg:#fbf1de;
+    --bad:#c23a3a;
+    --bad-bg:#fdecec;
+    --radius:18px;
     --shadow:0 4px 18px rgba(217,46,102,0.08);
   }
   *{box-sizing:border-box;}
-  body{
-    margin:0;
-    font-family:'Nunito',sans-serif;
-    background:var(--cream);
-    color:var(--ink);
+  body{margin:0;font-family:'Nunito',sans-serif;background:var(--cream);color:var(--ink);}
+  h1,h2,h3,.display{font-family:'Fraunces',serif;}
+ 
+  .back-link{max-width:900px;margin:0 auto;padding:18px 5vw 0;}
+  .back-link a{color:var(--pink-600);font-weight:800;text-decoration:none;font-size:0.9rem;}
+ 
+  /* ---- Hero ---- */
+  .hero{max-width:900px;margin:0 auto;padding:18px 5vw 10px;text-align:center;}
+  .eyebrow{color:var(--pink-500);font-weight:700;font-size:0.95rem;letter-spacing:.02em;margin-bottom:6px;}
+  .hero-title{
+    display:flex;align-items:center;justify-content:center;gap:14px;
+    font-size:2.3rem;font-weight:700;margin:6px 0 18px;flex-wrap:wrap;
   }
-  h1,h2,h3,.display{
-    font-family:'Fraunces',serif;
+  .hero-title .trophy{font-size:2rem;}
+  .hero-title .accent{color:var(--pink-500);}
+ 
+  .stat-box{
+    display:inline-flex;align-items:center;gap:10px;
+    background:#fff;border:1.5px solid var(--line);border-radius:999px;
+    padding:10px 22px;font-weight:800;color:var(--pink-600);box-shadow:var(--shadow);
+    margin-bottom:20px;
   }
-  header.top{
-    background:linear-gradient(135deg,var(--pink-100),var(--pink-50));
-    padding:22px 5vw;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:14px;
-    border-bottom:1px solid var(--line);
+  .stat-box .stat-label{color:var(--ink-soft);font-weight:700;}
+ 
+  .tagline{color:var(--ink-soft);font-size:1rem;margin:0 0 6px;}
+  .divider-heart{color:var(--pink-500);display:flex;align-items:center;justify-content:center;gap:10px;margin:10px 0 26px;}
+  .divider-heart::before,.divider-heart::after{content:"";height:1px;width:50px;background:var(--pink-300);}
+ 
+  /* ---- Filtros ---- */
+  .filtros{
+    max-width:1100px;margin:0 auto 30px;padding:0 5vw;
+    display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
   }
-  .brand{display:flex;align-items:center;gap:14px;}
-  .brand svg{flex-shrink:0;}
-  .brand .titles{line-height:1.15;}
-  .brand h1{font-size:1.7rem;margin:0;font-weight:700;color:var(--ink);}
-  .brand .sub{font-size:1rem;color:var(--pink-600);font-weight:600;}
-  .btn-primary{
-    background:linear-gradient(135deg,var(--pink-500),var(--pink-600));
-    color:#fff;
-    border:none;
-    padding:14px 22px;
-    border-radius:999px;
-    font-weight:800;
-    font-size:0.95rem;
-    cursor:pointer;
+  .filtro-pill{
+    border:1.5px solid var(--pink-300);background:#fff;color:var(--pink-600);
+    padding:9px 18px;border-radius:999px;font-weight:700;font-size:0.88rem;
+    cursor:pointer;transition:all .15s ease;
+  }
+  .filtro-pill:hover{background:var(--pink-50);}
+  .filtro-pill.active{background:var(--pink-500);border-color:var(--pink-500);color:#fff;}
+  .filtro-pill.action{
+    background:linear-gradient(135deg,var(--pink-500),var(--pink-600));color:#fff;border:none;
     box-shadow:0 6px 16px rgba(217,46,102,0.28);
-    transition:transform .15s ease, box-shadow .15s ease;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
   }
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(217,46,102,0.34);}
-  main{max-width:1400px;margin:0 auto;padding:40px 5vw 90px;}
-  .intro{text-align:center;margin-bottom:36px;}
-  .intro h2{font-size:2.1rem;margin:0 0 6px;}
-  .divider{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--pink-500);margin:12px 0;}
-  .divider::before,.divider::after{content:"";height:1px;width:60px;background:var(--pink-300);}
-  .intro p{color:var(--ink-soft);font-size:1rem;margin:0;}
-
-  .table-wrap{
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:var(--shadow);
-    border:1px solid var(--line);
-    background:#fff;
+  .filtro-pill.action:hover{transform:translateY(-1px);}
+  .filtro-pill.ghost-action{background:var(--pink-50);}
+ 
+  /* ---- Grid de tarjetas ---- */
+  main{max-width:1100px;margin:0 auto;padding:0 5vw 90px;}
+  .config-banner{
+    background:#fff4d6;border:1px solid #f0d98c;color:#5c4a10;
+    padding:14px 18px;border-radius:12px;font-size:0.88rem;margin-bottom:24px;display:none;
   }
-  table{width:100%;border-collapse:collapse;}
-  thead th{
-    background:var(--pink-100);
-    color:var(--pink-600);
-    text-align:left;
-    padding:16px 14px;
-    font-size:0.92rem;
-    font-weight:800;
-    border-bottom:1px solid var(--line);
-    white-space:nowrap;
+  .config-banner.show{display:block;}
+ 
+  .tragos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;}
+  .empty-state{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--ink-soft);}
+ 
+  .trago-card{
+    position:relative;background:#fff;border-radius:var(--radius);
+    box-shadow:var(--shadow);border:1px solid var(--line);
+    padding:18px;transition:box-shadow .25s ease, transform .25s ease;
   }
-  tbody td{
-    padding:16px 14px;
-    border-bottom:1px solid var(--line);
-    vertical-align:middle;
-    font-size:0.95rem;
+  .trago-card.hidden-filter{display:none;}
+  .trago-card.highlight{
+    box-shadow:0 0 0 3px var(--pink-500), 0 12px 28px rgba(217,46,102,0.28);
+    transform:translateY(-2px);
   }
-  tbody tr:last-child td{border-bottom:none;}
-  tbody tr:hover{background:var(--pink-50);}
-  .rank{font-family:'Fraunces',serif;font-weight:700;font-size:1.2rem;color:var(--pink-500);text-align:center;}
-  .trago-cell{display:flex;align-items:center;gap:14px;min-width:220px;}
-  .trago-cell img{width:64px;height:64px;object-fit:cover;border-radius:12px;border:2px solid var(--pink-100);}
-  .trago-cell .no-img{width:64px;height:64px;border-radius:12px;background:var(--pink-50);display:flex;align-items:center;justify-content:center;font-size:1.4rem;}
-  .trago-cell strong{display:block;font-size:1.02rem;}
-  .trago-cell span{color:var(--ink-soft);font-size:0.85rem;}
-  .score{display:flex;align-items:center;gap:6px;font-weight:800;font-size:1.02rem;}
-  .score .icon{font-size:1rem;}
-  .comment{color:var(--ink-soft);max-width:260px;}
-  .foto-ref img{width:64px;height:64px;object-fit:cover;border-radius:12px;}
-  .actions{display:flex;gap:8px;}
+  .rank-badge{
+    position:absolute;top:-10px;left:-10px;
+    background:var(--pink-500);color:#fff;font-family:'Fraunces',serif;font-weight:700;
+    font-size:0.85rem;padding:5px 11px;border-radius:999px;box-shadow:0 3px 8px rgba(217,46,102,0.35);
+  }
+  .card-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;}
+  .thumb img,.thumb .no-img{width:60px;height:60px;object-fit:cover;border-radius:12px;}
+  .thumb .no-img{background:var(--pink-50);display:flex;align-items:center;justify-content:center;font-size:1.5rem;}
+  .card-title{flex:1;min-width:0;}
+  .card-title h3{margin:0 0 2px;font-size:1.08rem;overflow-wrap:break-word;}
+  .categoria-tag{font-size:0.78rem;color:var(--pink-600);font-weight:700;}
+  .card-actions{display:flex;gap:6px;flex-shrink:0;}
   .icon-btn{
-    border:1.5px solid var(--pink-300);
-    background:#fff;
-    color:var(--pink-500);
-    width:36px;height:36px;
-    border-radius:10px;
-    cursor:pointer;
-    display:flex;align-items:center;justify-content:center;
-    transition:background .15s;
+    border:1.5px solid var(--pink-300);background:#fff;color:var(--pink-500);
+    width:32px;height:32px;border-radius:9px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;font-size:0.85rem;
   }
   .icon-btn:hover{background:var(--pink-100);}
   .icon-btn.del{color:#c23a3a;border-color:#f1c2c2;}
   .icon-btn.del:hover{background:#fdecec;}
-
-  .empty-row td{padding:50px 20px;text-align:center;color:var(--ink-soft);}
-
-  /* Modal */
+ 
+  .ratings{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+  .rating-row{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+  .rating-label{font-size:0.82rem;color:var(--ink-soft);font-weight:700;}
+  .icon-rating span{font-size:0.9rem;margin-left:1px;}
+  .ic-empty{opacity:.22;filter:grayscale(70%);}
+ 
+  .momentos{margin-bottom:14px;}
+  .momentos-label{font-size:0.8rem;font-weight:800;color:var(--pink-600);margin-bottom:8px;}
+  .momentos-label span{color:var(--pink-500);}
+  .momentos-grid{display:flex;gap:8px;flex-wrap:wrap;}
+  .momento-thumb img{width:52px;height:52px;object-fit:cover;border-radius:10px;border:2px solid var(--pink-100);}
+  .momento-empty{font-size:0.78rem;color:var(--ink-soft);font-style:italic;}
+ 
+  .card-footer{border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:8px;}
+  .ubicacion{font-size:0.85rem;color:var(--ink-soft);font-weight:700;}
+  .notas{font-size:0.85rem;color:var(--ink);display:flex;flex-direction:column;gap:3px;}
+  .veredicto{
+    font-size:0.85rem;font-weight:800;padding:8px 12px;border-radius:10px;
+  }
+  .veredicto-good{background:var(--good-bg);color:var(--good);}
+  .veredicto-neutral{background:var(--neutral-bg);color:var(--neutral);}
+  .veredicto-bad{background:var(--bad-bg);color:var(--bad);}
+ 
+  /* ---- Modal ---- */
   .overlay{
     position:fixed;inset:0;background:rgba(43,34,48,0.45);
     display:none;align-items:flex-start;justify-content:center;
@@ -141,95 +157,84 @@
   .modal .modal-sub{color:var(--ink-soft);margin:0 0 22px;font-size:0.92rem;}
   .field{margin-bottom:16px;}
   .field label{display:block;font-weight:700;font-size:0.88rem;margin-bottom:6px;color:var(--ink);}
-  .field input[type=text],.field input[type=number],.field textarea{
+  .field input[type=text],.field input[type=number],.field select,.field textarea{
     width:100%;padding:11px 13px;border-radius:10px;border:1.5px solid var(--line);
     font-family:inherit;font-size:0.95rem;background:var(--cream);
   }
-  .field textarea{resize:vertical;min-height:60px;}
-  .field input:focus,.field textarea:focus{outline:2px solid var(--pink-300);border-color:var(--pink-500);}
+  .field textarea{resize:vertical;min-height:56px;}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--pink-300);border-color:var(--pink-500);}
   .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-  .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+  .row4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
   .hint{font-size:0.78rem;color:var(--ink-soft);margin-top:4px;}
   .file-drop{
-    border:2px dashed var(--pink-300);border-radius:12px;padding:18px;text-align:center;
+    border:2px dashed var(--pink-300);border-radius:12px;padding:16px;text-align:center;
     background:var(--pink-50);cursor:pointer;
   }
-  .file-drop img{max-width:100%;max-height:120px;border-radius:10px;margin-top:10px;}
+  .file-drop img{max-width:100%;max-height:110px;border-radius:10px;margin-top:8px;}
+  .momentos-preview{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
+  .momento-preview-item{position:relative;}
+  .momento-preview-item img{width:56px;height:56px;object-fit:cover;border-radius:10px;border:2px solid var(--pink-100);}
+  .momento-remove{
+    position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;
+    background:var(--pink-500);color:#fff;border:2px solid #fff;font-size:0.75rem;line-height:1;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+  }
   .modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:24px;}
   .btn-secondary{
     background:#fff;border:1.5px solid var(--line);color:var(--ink);
     padding:12px 20px;border-radius:999px;font-weight:700;cursor:pointer;
   }
   .btn-secondary:hover{background:var(--pink-50);}
-  .save-status{font-size:0.85rem;margin-top:10px;min-height:18px;color:var(--pink-600);font-weight:700;}
-  .config-banner{
-    background:#fff4d6;border:1px solid #f0d98c;color:#5c4a10;
-    padding:14px 18px;border-radius:12px;font-size:0.88rem;margin-bottom:24px;
-    display:none;
+  .btn-primary{
+    background:linear-gradient(135deg,var(--pink-500),var(--pink-600));
+    color:#fff;border:none;padding:12px 22px;border-radius:999px;
+    font-weight:800;font-size:0.95rem;cursor:pointer;
+    box-shadow:0 6px 16px rgba(217,46,102,0.28);
   }
-  .config-banner.show{display:block;}
+  .save-status{font-size:0.85rem;margin-top:10px;min-height:18px;color:var(--pink-600);font-weight:700;}
+ 
   @media(max-width:720px){
-    .row2,.row3{grid-template-columns:1fr;}
-    table thead{display:none;}
-    table, tbody, tr, td{display:block;width:100%;}
-    tbody tr{border-bottom:8px solid var(--pink-50);padding:12px 6px;}
-    tbody td{border:none;padding:8px 8px;}
-    .comment{max-width:100%;}
+    .row2,.row4{grid-template-columns:1fr 1fr;}
+    .hero-title{font-size:1.7rem;}
   }
 </style>
 </head>
 <body>
-
-<header class="top">
-  <div class="brand">
-    <svg width="46" height="46" viewBox="0 0 48 48" fill="none">
-      <path d="M10 8h28l-12 16v12h6v4H16v-4h6V24L10 8z" stroke="#f0447d" stroke-width="2.4" stroke-linejoin="round" fill="none"/>
-      <path d="M17 12c2 3 5 4 7 4s5-1 7-4" stroke="#f0447d" stroke-width="2" fill="none" stroke-linecap="round"/>
-    </svg>
-    <div class="titles">
-      <h1 class="display">Nuestro Ranking <span style="color:#f0447d">♥</span></h1>
-      <div class="sub">♥ de Tragos ♥</div>
-    </div>
-  </div>
-  <button class="btn-primary" id="openAddBtn">+ Agregar Trago</button>
-</header>
-
-<div style="max-width:1400px;margin:0 auto;padding:18px 5vw 0;">
-  <a href="index.html" style="color:#d92e66;font-weight:800;text-decoration:none;font-size:0.9rem;">← Volver al inicio</a>
+ 
+<div class="back-link"><a href="index.html">← Volver al inicio</a></div>
+ 
+<div class="hero">
+  <div class="eyebrow">♥ Nuestro espacio ♥</div>
+  <div class="hero-title"><span class="trophy">🏆</span> Ranking <span class="accent">de Tragos</span></div>
+ 
+  <div class="stat-box"><span class="stat-label">Tragos probados:</span> <span id="statCount">0</span></div>
+ 
+  <p class="tagline">Probamos, calificamos y recordamos nuestros mejores tragos juntos</p>
+  <div class="divider-heart">♥</div>
 </div>
-
+ 
+<div class="filtros">
+  <button class="filtro-pill active" data-cat="todos">Todos</button>
+  <button class="filtro-pill" data-cat="cerveza">Cerveza</button>
+  <button class="filtro-pill" data-cat="coctel">Cóctel</button>
+  <button class="filtro-pill" data-cat="vino">Vino</button>
+  <button class="filtro-pill" data-cat="ron">Ron</button>
+  <button class="filtro-pill" data-cat="tequila">Tequila</button>
+  <button class="filtro-pill" data-cat="otro">Otro</button>
+  <button class="filtro-pill action" id="openAddBtn">+ Agregar Trago</button>
+  <button class="filtro-pill ghost-action" id="randomBtn">🎲 Trago Aleatorio</button>
+</div>
+ 
 <main>
   <div class="config-banner" id="configBanner">
     ⚠️ Falta configurar la conexión a la base de datos. Abre <code>config.js</code> y coloca tu URL y clave anónima de Supabase (ver instrucciones en el README).
   </div>
-
-  <div class="intro">
-    <h2 class="display">Nuestros tragos favoritos</h2>
-    <div class="divider">♥</div>
-    <p>Probamos, calificamos y recordamos nuestros mejores tragos juntos.</p>
-  </div>
-
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Trago</th>
-          <th>Puntuación General</th>
-          <th>Puntuación del Sabor</th>
-          <th>Que tanto nos pega 🍺</th>
-          <th>Comentarios</th>
-          <th>Foto de referencia</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="tbody">
-        <tr class="empty-row"><td colspan="8">Cargando tragos…</td></tr>
-      </tbody>
-    </table>
+ 
+  <div class="tragos-grid" id="tragosGrid">
+    <div class="empty-state">Cargando tragos…</div>
   </div>
 </main>
-
+ 
 <!-- Modal -->
 <div class="overlay" id="overlay">
   <div class="modal">
@@ -237,51 +242,90 @@
     <p class="modal-sub">Llena los datos para guardarlo en el ranking.</p>
     <form id="tragoForm">
       <input type="hidden" id="tragoId">
+ 
       <div class="row2">
         <div class="field">
           <label for="nombre">Nombre del trago</label>
           <input type="text" id="nombre" required placeholder="Ej. Mojito">
         </div>
         <div class="field">
-          <label for="descripcion">Descripción corta</label>
-          <input type="text" id="descripcion" placeholder="Ej. Refrescante y perfecto">
+          <label for="categoria">Categoría</label>
+          <select id="categoria" required>
+            <option value="cerveza">🍺 Cerveza</option>
+            <option value="coctel">🍹 Cóctel</option>
+            <option value="vino">🍷 Vino</option>
+            <option value="ron">🥃 Ron</option>
+            <option value="tequila">🥂 Tequila</option>
+            <option value="otro" selected>🍸 Otro</option>
+          </select>
         </div>
       </div>
-      <div class="row3">
+ 
+      <div class="row4">
         <div class="field">
-          <label for="puntGeneral">Puntuación general</label>
+          <label for="puntGeneral">General</label>
           <input type="number" id="puntGeneral" min="0" max="5" step="0.1" required placeholder="4.7">
         </div>
         <div class="field">
-          <label for="puntSabor">Puntuación del sabor</label>
+          <label for="puntSabor">Sabor 🍺</label>
           <input type="number" id="puntSabor" min="0" max="5" step="0.1" required placeholder="4.8">
         </div>
         <div class="field">
-          <label for="puntPega">Que tanto nos pega 🍺</label>
-          <input type="number" id="puntPega" min="0" max="5" step="0.1" required placeholder="4.2">
+          <label for="puntSubidon">Subidón ❤️</label>
+          <input type="number" id="puntSubidon" min="0" max="5" step="0.1" required placeholder="3.5">
+        </div>
+        <div class="field">
+          <label for="puntResaca">Resaca 🥴</label>
+          <input type="number" id="puntResaca" min="0" max="5" step="0.1" required placeholder="2">
         </div>
       </div>
+ 
       <div class="field">
-        <label for="comentarios">Comentarios</label>
-        <textarea id="comentarios" placeholder="Fresco, dulce y con el punto justo de menta..."></textarea>
+        <label for="ubicacion">📍 Ubicación</label>
+        <input type="text" id="ubicacion" placeholder="Ej. Parque La Consolación">
       </div>
+ 
+      <div class="row2">
+        <div class="field">
+          <label for="notaEl">Nota de Él</label>
+          <textarea id="notaEl" placeholder="¿Qué le pareció a él?"></textarea>
+        </div>
+        <div class="field">
+          <label for="notaElla">Nota de Ella</label>
+          <textarea id="notaElla" placeholder="¿Qué le pareció a ella?"></textarea>
+        </div>
+      </div>
+ 
       <div class="field">
-        <label>Foto del trago (miniatura)</label>
+        <label for="veredicto">Veredicto final</label>
+        <select id="veredicto">
+          <option value="">Sin definir</option>
+          <option value="repetir">💖 Repetir siempre</option>
+          <option value="otra_vez">😊 Sí, otra vez</option>
+          <option value="tal_vez">🤔 Tal vez</option>
+          <option value="no_volver">🚫 No volver a probar</option>
+        </select>
+      </div>
+ 
+      <div class="field">
+        <label>Foto principal (miniatura)</label>
         <div class="file-drop" id="dropZone">
           <span id="dropText">Haz clic para elegir una imagen (opcional)</span>
           <input type="file" id="fotoInput" accept="image/*" style="display:none">
           <div><img id="previewImg" style="display:none"></div>
         </div>
       </div>
+ 
       <div class="field">
-        <label>Foto de referencia (columna aparte)</label>
-        <div class="file-drop" id="dropZoneRef">
-          <span id="dropTextRef">Haz clic para elegir una imagen (opcional)</span>
-          <input type="file" id="fotoInputRef" accept="image/*" style="display:none">
-          <div><img id="previewImgRef" style="display:none"></div>
+        <label>Momentos (varias fotos)</label>
+        <div class="file-drop" id="dropZoneMomentos">
+          <span>Haz clic para agregar fotos de este momento</span>
+          <input type="file" id="momentosInput" accept="image/*" multiple style="display:none">
         </div>
-        <div class="hint">Ambas fotos son opcionales e independientes. Se guardan en Supabase Storage.</div>
+        <div class="momentos-preview" id="momentosPreview"></div>
+        <div class="hint">Puedes agregar varias fotos. Se guardan en Supabase Storage.</div>
       </div>
+ 
       <div class="modal-actions">
         <button type="button" class="btn-secondary" id="cancelBtn">Cancelar</button>
         <button type="submit" class="btn-primary" id="saveBtn">Guardar trago</button>
@@ -290,14 +334,14 @@
     </form>
   </div>
 </div>
-
+ 
 <script>
   // Captura errores ANTES de cargar app.js, para detectar problemas de carga o sintaxis
   window.addEventListener('error', function(e) {
-    var tb = document.getElementById('tbody');
-    if (tb) {
-      tb.innerHTML = '<tr class="empty-row"><td colspan="8">⚠️ Error: ' +
-        (e.message || 'desconocido') + ' — archivo: ' + (e.filename || '?') + ' línea ' + (e.lineno || '?') + '</td></tr>';
+    var g = document.getElementById('tragosGrid');
+    if (g) {
+      g.innerHTML = '<div class="empty-state">⚠️ Error: ' +
+        (e.message || 'desconocido') + ' — archivo: ' + (e.filename || '?') + ' línea ' + (e.lineno || '?') + '</div>';
     }
   }, true);
 </script>
@@ -305,3 +349,4 @@
 <script src="app.js"></script>
 </body>
 </html>
+ 
