@@ -2,7 +2,7 @@
 // APP: Nuestro Ranking de Tragos
 // ============================================================
 
-let supabase = null;
+let supabaseClient = null;
 let editingId = null;
 let selectedFile = null;
 
@@ -42,7 +42,7 @@ function initSupabase() {
       tbody.innerHTML = `<tr class="empty-row"><td colspan="8">⚠️ No se pudo cargar la librería de Supabase (revisa tu conexión a internet o recarga la página).</td></tr>`;
       return;
     }
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     loadTragos();
   } catch (err) {
     console.error(err);
@@ -58,7 +58,7 @@ async function loadTragos() {
       setTimeout(() => reject(new Error('Tiempo de espera agotado. Revisa que la URL de Supabase sea correcta y que el proyecto no esté pausado.')), 10000)
     );
     const result = await Promise.race([
-      supabase.from('tragos').select('*').order('puntuacion_general', { ascending: false }),
+      supabaseClient.from('tragos').select('*').order('puntuacion_general', { ascending: false }),
       timeout
     ]);
     data = result.data;
@@ -201,7 +201,7 @@ fotoInput.addEventListener('change', () => {
 // --- Guardar (crear o editar) ---
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  if (!supabase) {
+  if (!supabaseClient) {
     saveStatus.textContent = 'Configura Supabase primero en config.js';
     return;
   }
@@ -216,11 +216,11 @@ form.addEventListener('submit', async (e) => {
     if (selectedFile) {
       const ext = selectedFile.name.split('.').pop();
       const fileName = `${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`;
-      const { error: upErr } = await supabase.storage
+      const { error: upErr } = await supabaseClient.storage
         .from('fotos-tragos')
         .upload(fileName, selectedFile);
       if (upErr) throw upErr;
-      const { data: pub } = supabase.storage.from('fotos-tragos').getPublicUrl(fileName);
+      const { data: pub } = supabaseClient.storage.from('fotos-tragos').getPublicUrl(fileName);
       foto_url = pub.publicUrl;
     }
 
@@ -235,10 +235,10 @@ form.addEventListener('submit', async (e) => {
     if (foto_url) payload.foto_url = foto_url;
 
     if (editingId) {
-      const { error } = await supabase.from('tragos').update(payload).eq('id', editingId);
+      const { error } = await supabaseClient.from('tragos').update(payload).eq('id', editingId);
       if (error) throw error;
     } else {
-      const { error } = await supabase.from('tragos').insert(payload);
+      const { error } = await supabaseClient.from('tragos').insert(payload);
       if (error) throw error;
     }
 
@@ -256,7 +256,7 @@ form.addEventListener('submit', async (e) => {
 // --- Eliminar ---
 async function deleteTrago(id) {
   if (!confirm('¿Eliminar este trago del ranking?')) return;
-  const { error } = await supabase.from('tragos').delete().eq('id', id);
+  const { error } = await supabaseClient.from('tragos').delete().eq('id', id);
   if (error) {
     alert('Error al eliminar: ' + error.message);
     return;
