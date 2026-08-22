@@ -1,1 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mauricio ♡ Estrella</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Caveat:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink-50:#fff0f4;
+    --pink-100:#ffe1ea;
+    --pink-300:#ff9db8;
+    --pink-500:#f0447d;
+    --pink-600:#d92e66;
+    --ink:#2b2230;
+    --ink-soft:#6b5f6b;
+    --cream:#fffaf8;
+    --line:#f4dfe6;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Nunito',sans-serif;
+    background:linear-gradient(180deg,var(--pink-100) 0%, var(--pink-50) 22%, var(--cream) 55%);
+    color:var(--ink);
+    min-height:100vh;
+  }
+  .wrap{
+    max-width:520px;
+    margin:0 auto;
+    padding:36px 22px 60px;
+    text-align:center;
+    position:relative;
+  }
+  .top-title{
+    font-family:'Fraunces',serif;
+    font-size:1.6rem;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin:0 0 18px;
+  }
+  .quote{
+    display:inline-block;
+    background:#e9f3e3;
+    color:#3f5a34;
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:1.05rem;
+    padding:16px 26px;
+    border-radius:22px;
+    margin:0 0 34px;
+    line-height:1.4;
+  }
+  .photo-frame{
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    margin:0 auto 22px;
+    padding:8px;
+    background:#fff;
+    box-shadow:0 12px 30px rgba(217,46,102,0.18);
+  }
+  .photo-frame img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%;
+    display:block;
+  }
+  .names{
+    font-family:'Caveat',cursive;
+    font-size:2.6rem;
+    font-weight:700;
+    margin:0 0 8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .names .name-a{color:var(--ink);}
+  .names .name-b{color:var(--pink-500);}
+  .divider{color:var(--pink-500);font-size:1.1rem;margin-bottom:32px;}
 
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-top:8px;
+  }
+  .card{
+    display:block;
+    text-decoration:none;
+    color:inherit;
+    border-radius:20px;
+    padding:22px 14px 18px;
+    text-align:center;
+    transition:transform .15s ease, box-shadow .15s ease;
+    box-shadow:0 4px 14px rgba(0,0,0,0.05);
+    position:relative;
+  }
+  .card:active{transform:scale(0.97);}
+  .card .emoji{font-size:2rem;display:block;margin-bottom:10px;}
+  .card .label{font-weight:800;font-size:0.98rem;line-height:1.25;color:var(--ink);}
+  .card .arrow{
+    margin-top:12px;
+    width:34px;height:34px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;
+    margin-left:auto;margin-right:auto;
+  }
+  .card.soon{opacity:0.62;}
+  .card.soon .tag{
+    position:absolute;top:10px;right:10px;
+    background:rgba(255,255,255,0.75);
+    color:var(--ink-soft);
+    font-size:0.62rem;
+    font-weight:800;
+    padding:3px 8px;
+    border-radius:999px;
+    letter-spacing:.02em;
+  }
+
+  .c-purple{background:#f1e9fb;} .c-purple .arrow{background:#c9a8ef;color:#fff;}
+  .c-pink{background:#ffe3ea;} .c-pink .arrow{background:#f0729a;color:#fff;}
+  .c-yellow{background:#fdf1d6;} .c-yellow .arrow{background:#f0c25e;color:#fff;}
+  .c-green{background:#e6f3e1;} .c-green .arrow{background:#8fc47c;color:#fff;}
+  .c-blue{background:#e2ecfb;} .c-blue .arrow{background:#7fa8e8;color:#fff;}
+  .c-lilac{background:#efe7fb;} .c-lilac .arrow{background:#b699e8;color:#fff;}
+
+  .footer-hearts{margin-top:44px;color:var(--pink-300);font-size:1.4rem;letter-spacing:10px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top-title">♡ Nuestro espacio ♡</div>
+  <div class="quote">"Pequeños momentos,<br>grandes recuerdos." ♡</div>
+
+  <div class="photo-frame">
+    <img src="assets/pareja.jpg" alt="Mauricio y Estrella">
+  </div>
+
+  <div class="names">
+    <span class="name-a">Mauricio</span>
+    <span>♡</span>
+    <span class="name-b">Estrella</span>
+  </div>
+  <div class="divider">─── ♥ ───</div>
+
+  <div class="grid">
+    <a href="ranking.html" class="card c-purple">
+      <span class="emoji">🏆</span>
+      <span class="label">Ranking<br>de Tragos</span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a href="#" class="card c-pink soon" onclick="return false;">
+      <span class="tag">Próximamente</span>
+      <span class="emoji">🍹</span>
+      <span class="label">Jugos<br>y Más</span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a href="#" class="card c-yellow soon" onclick="return false;">
+      <span class="tag">Próximamente</span>
+      <span class="emoji">🎮</span>
+      <span class="label">Juegos<br>en Pareja</span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a href="#" class="card c-green soon" onclick="return false;">
+      <span class="tag">Próximamente</span>
+      <span class="emoji">📝</span>
+      <span class="label">Notas<br>y Recuerdos</span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a href="#" class="card c-blue soon" onclick="return false;">
+      <span class="tag">Próximamente</span>
+      <span class="emoji">📅</span>
+      <span class="label">Planes<br>y Fechas</span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a href="#" class="card c-lilac soon" onclick="return false;">
+      <span class="tag">Próximamente</span>
+      <span class="emoji">💌</span>
+      <span class="label">Mensajes<br>para Ti</span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+
+  <div class="footer-hearts">♡ ♡ ♡</div>
+</div>
+</body>
+</html>
