@@ -24,16 +24,38 @@ function initSupabase() {
     tbody.innerHTML = `<tr class="empty-row"><td colspan="8">Configura Supabase en config.js para empezar a guardar tragos.</td></tr>`;
     return;
   }
-  supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  loadTragos();
+
+  try {
+    if (!window.supabase || typeof window.supabase.createClient !== 'function') {
+      tbody.innerHTML = `<tr class="empty-row"><td colspan="8">⚠️ No se pudo cargar la librería de Supabase (revisa tu conexión a internet o recarga la página).</td></tr>`;
+      return;
+    }
+    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    loadTragos();
+  } catch (err) {
+    console.error(err);
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="8">⚠️ Error al iniciar la conexión: ${err.message}</td></tr>`;
+  }
 }
 
 // --- Cargar tragos desde la base de datos ---
 async function loadTragos() {
-  const { data, error } = await supabase
-    .from('tragos')
-    .select('*')
-    .order('puntuacion_general', { ascending: false });
+  let data, error;
+  try {
+    const timeout = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('Tiempo de espera agotado. Revisa que la URL de Supabase sea correcta y que el proyecto no esté pausado.')), 10000)
+    );
+    const result = await Promise.race([
+      supabase.from('tragos').select('*').order('puntuacion_general', { ascending: false }),
+      timeout
+    ]);
+    data = result.data;
+    error = result.error;
+  } catch (err) {
+    console.error(err);
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="8">⚠️ ${err.message}</td></tr>`;
+    return;
+  }
 
   if (error) {
     console.error(error);
